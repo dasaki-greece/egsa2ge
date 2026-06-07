@@ -1,0 +1,127 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run Egsa2GE (uv)",
+      "type": "shell",
+      "command": "uv",
+      "args": [
+        "run",
+        "egsa87-google-earth"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Run Egsa2GE (Standard Python)",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "-m",
+        "egsa87_google_earth"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
+      "label": "Build Executable (Normal)",
+      "type": "shell",
+      "command": "uv",
+      "args": [
+        "run",
+        "--with",
+        "pyinstaller",
+        "--with",
+        "pyproj",
+        "pyinstaller",
+        "EGSA2GE_Portable.spec"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
+      "label": "Build Executable (Debug)",
+      "type": "shell",
+      "command": "uv",
+      "args": [
+        "run",
+        "--with",
+        "pyinstaller",
+        "--with",
+        "pyproj",
+        "pyinstaller",
+        "--onefile",
+        "--name",
+        "EGSA2GE_debug",
+        "--icon",
+        "assets/icon04.png",
+        "--add-data",
+        "'assets;assets'",
+        "run.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
+      "label": "Build macOS App",
+      "type": "shell",
+      "command": "uv",
+      "args": [
+        "run",
+        "--with",
+        "pyinstaller",
+        "--with",
+        "pyproj",
+        "pyinstaller",
+        "--onefile",
+        "--windowed",
+        "--name",
+        "EGSA2GE_Mac",
+        "--add-data",
+        "assets:assets",
+        "run.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    }
+  ]
+}

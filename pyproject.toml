@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "egsa87-google-earth"
+version = "0.1.0"
+description = "EGSA87 / EPSG:2100 to Google Earth NetworkLink App"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "pyproj>=3.0.0",
+    "ttkbootstrap>=1.1.0",
+]
+
+[project.scripts]
+egsa87-google-earth = "egsa87_google_earth.app:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/egsa87_google_earth"]
+
+[dependency-groups]
+dev = [
+    "pyinstaller>=6.20.0",
+]

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ΕΓΣΑ ’87 → Google Earth | dasaki.gr</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --primary-glow: rgba(59, 130, 246, 0.5);
+            --success-glow: rgba(16, 185, 129, 0.5);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        header {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .github-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .github-link:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--text-secondary);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 4rem auto 2rem;
+            padding: 0 1.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(to right, #ffffff, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .download-container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(16px);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            margin-bottom: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .download-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .download-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .download-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            border-radius: 16px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .download-btn.windows {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.2) 100%);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.05);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .download-btn.windows:hover {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.3) 100%);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        .download-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .download-os {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .download-meta {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .features-section {
+            max-width: 1200px;
+            margin: 0 auto 6rem;
+            padding: 0 1.5rem;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .architecture-section {
+            max-width: 800px;
+            margin: 0 auto 6rem;
+            padding: 0 1.5rem;
+            text-align: center;
+        }
+
+        .architecture-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .architecture-card h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .architecture-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            background: rgba(11, 15, 25, 0.8);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .download-grid {
+                gap: 1.5rem;
+            }
+            .download-container {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">
+            🌍 ΕΓΣΑ ’87 → GE
+        </a>
+        <a href="https://github.com/dasaki-greece/egsa2ge" class="github-link" target="_blank">
+            <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+            </svg>
+            GitHub
+        </a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>ΕΓΣΑ ’87 σε Google Earth</h1>
+            <p>
+                Μια σύγχρονη και πρακτική λύση για τη δυναμική εμφάνιση και μετατροπή Ελληνικών συντεταγμένων <strong>ΕΓΣΑ ’87</strong> στο <strong>Google Earth Pro</strong> και στους <strong>Χάρτες Google (Google Maps)</strong> σε πραγματικό χρόνο.
+            </p>
+
+            <div class="download-container">
+                <h2 class="download-title">📥 Λήψη Εφαρμογής</h2>
+                <div class="download-grid">
+                    <a href="https://github.com/dasaki-greece/egsa2ge/releases/latest" class="download-btn windows" target="_blank">
+                        <span class="download-icon">💻</span>
+                        <span class="download-os">Για Windows</span>
+                        <span class="download-meta">Φορητό εκτελέσιμο (.exe)</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <h2 class="section-title">✨ Κύρια Χαρακτηριστικά</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">✈️</span>
+                    <h3>Άμεση Μετάβαση (Fly-To)</h3>
+                    <p>
+                        Εισάγετε συντεταγμένες ΕΓΣΑ '87 και μεταβείτε αυτόματα στο αντίστοιχο σημείο στο Google Earth Pro με ομαλή πτήση (smooth fly-to), χωρίς bounce effects.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🎯</span>
+                    <h3>Camera Tracking (Σταυρόνημα)</h3>
+                    <p>
+                        Καθώς περιηγείστε στο Google Earth, το κέντρο της οθόνης (που σημαδεύεται με ειδικό σταυρόνημα) μετατρέπεται αυτόματα σε ΕΓΣΑ '87 και εμφανίζεται live στην εφαρμογή.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📦</span>
+                    <h3>100% Portable Mode</h3>
+                    <p>
+                        Δεν απαιτεί πολύπλοκα plugins στο Google Earth, ούτε δημιουργεί μόνιμους φακέλους στον υπολογιστή σας. Το αρχείο επικοινωνίας δημιουργείται προσωρινά στον φάκελο Temp.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🛡️</span>
+                    <h3>Αυτόματη Επανασύνδεση</h3>
+                    <p>
+                        Αν κλείσετε το Google Earth ή διαγράψετε κατά λάθος τη σύνδεση (Network Link), η εφαρμογή το εντοπίζει και το επαναφέρει αυτόματα στην επόμενη χρήση!
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🗺️</span>
+                    <h3>Προβολή στους Χάρτες Google</h3>
+                    <p>
+                        Άμεσο άνοιγμα της θέσης στους Χάρτες Google (Google Maps) μέσω του περιηγητή ιστού σας για Street View ή πλοήγηση.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📌</span>
+                    <h3>Προσθήκη σε Μόνιμα Σημεία</h3>
+                    <p>
+                        Αποθηκεύστε τα σημεία ενδιαφέροντος ως μόνιμα Placemarks στα «Μέρη μου» του Google Earth για μελλοντική χρήση.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="architecture-section">
+            <div class="architecture-card">
+                <h2>📐 Πώς Λειτουργεί</h2>
+                <p>
+                    Η εφαρμογή αποφεύγει την ανάγκη ανάπτυξης περίπλοκων εσωτερικών πρόσθετων (plugins) για το Google Earth. Αντίθετα, εκτελεί έναν <strong>τοπικό Web Server</strong> (στη θύρα 8000) που επικοινωνεί αμφίδρομα και "ζωντανά" μέσω HTTP με την τεχνολογία <strong>NetworkLink</strong> του Google Earth Pro.
+                </p>
+                <p>
+                    Με τον τρόπο αυτό, η μετατροπή των γεωδαιτικών δεδομένων από το Ελληνικό σύστημα ΕΓΣΑ87 στο παγκόσμιο WGS84 γίνεται ακαριαία, προσφέροντας μια εξαιρετικά ομαλή εμπειρία χρήσης.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            © 2026 <a href="https://dasaki.gr" target="_blank">dasaki.gr</a>. Αναπτύχθηκε ως βοηθητικό εργαλείο για δασολόγους, μηχανικούς και τοπογράφους.
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-secondary);">
+            Διατίθεται υπό άδεια χρήσης MIT. Δείτε τον κώδικα στο <a href="https://github.com/dasaki-greece/egsa2ge" target="_blank">GitHub</a>.
+        </p>
+    </footer>
+
+</body>
+</html>
